@@ -23,11 +23,22 @@ public class Particle {
     }    
 
     /**
-     * Apply the given vector force to the particle
+     * Use some basic trigonometry to apply the given
+     * vector to this particle
+     * 
      * @param vector
      */
     public void applyVector(Vector vector) {
+        float adjacent = 0; //dx
+        float opposite = 0; //dy
+        float hypotenuse = vector.getMagnitude();
+        double angle = Math.toRadians(vector.getDirection());
         
+        adjacent = (float) (Math.cos(angle) * hypotenuse);
+        opposite = (float) (Math.sin(angle) * hypotenuse);
+        
+        x += adjacent;
+        y += opposite; 
     }
     
     public float getX() {
