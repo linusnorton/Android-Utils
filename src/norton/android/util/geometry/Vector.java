@@ -6,8 +6,8 @@ package norton.android.util.geometry;
  * @author Linus Norton <linusnorton@gmail.com>
  */
 public class Vector {
-    private float direction;
-    private float magnitude;
+    protected float direction;
+    protected float magnitude;
     
     /**
      * Create the vector with the given direction
