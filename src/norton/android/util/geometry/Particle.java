@@ -6,20 +6,17 @@ package norton.android.util.geometry;
  * @author Linus Norton <linusnorton@gmail.com>
  */
 public class Particle {
-    private float x;
-    private float y;
-    private float mass;
+    protected float x;
+    protected float y;
     
     public Particle() {
         this.x = 0;
         this.y = 0;
-        this.mass = 0;
     }
     
-    public Particle(float x, float y, float mass) {        
+    public Particle(float x, float y) {        
         this.x = x;
         this.y = y;
-        this.mass = mass;
     }    
 
     /**
@@ -56,12 +53,5 @@ public class Particle {
     public void setY(float y) {
         this.y = y;
     }    
-    
-    public float getMass() {
-        return mass;
-    }
 
-    public void setMass(float mass) {
-        this.mass = mass;
-    }    
 }
