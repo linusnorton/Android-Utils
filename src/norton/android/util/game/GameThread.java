@@ -1,29 +1,28 @@
 package norton.android.util.game;
 
-import norton.android.util.graphics.Renderer;
-import norton.android.util.graphics.Scene;
+import java.util.ArrayList;
+
 import android.util.Log;
 
 /**
  * This is generic game thread that contains the main game loop.
  * 
- * It manages the FPS and the sub class just needs to implement the tick logic
+ * It manages the FPS and invokes the tick() method of every TicketListener
+ * every cycle.
  * 
  * @author Linus Norton <linusnorton@gmail.com>
  */
-public abstract class GameThread implements Runnable, Scene {
+public class GameThread implements Runnable {
     private int tickLength;
     private boolean running;
     private boolean paused;
-    private Renderer renderer;
+    private ArrayList<OnTickListener> listeners;
 
     /**
      * Setup the thread with a default 20fps
      */
     public GameThread() {
-        tickLength = 50; //20fps
-        running = false;
-        paused = false;
+    	this(50); //20fps
     }
     
     /**
@@ -34,6 +33,7 @@ public abstract class GameThread implements Runnable, Scene {
         tickLength = (int) (1000 / fps);
         running = false;
         paused = false;
+        listeners = new ArrayList<OnTickListener>();
     }
     
     /**
@@ -59,22 +59,15 @@ public abstract class GameThread implements Runnable, Scene {
             loopStartTime = System.currentTimeMillis();
             
             if (!paused) {                                        
-                tick();            
-                
-                if (renderer != null) {
-                    renderer.render(this);
+                for (OnTickListener listener : listeners) {
+                	listener.onTick();
                 }
             }
             
             loopExecutionTime = System.currentTimeMillis() - loopStartTime;
         }
 
-    }
-    
-    /**
-     * Implement your game logic here
-     */
-    protected abstract void tick();
+    }    
 
     /**
      * Prevents the game from calling the tick method
@@ -108,15 +101,24 @@ public abstract class GameThread implements Runnable, Scene {
      * Return the current tick length
      * @return
      */
-    protected int getTickLength() {
+    public int getTickLength() {
         return tickLength;
     }
     
     /**
-     * Set the renderer that draws this scene
-     * @param renderer
+     * Attach a listener to the ticks
+     * @param listener
      */
-    public void setRenderer(Renderer renderer) {
-        this.renderer = renderer;
+    public void addTickListener(OnTickListener listener) {
+    	listeners.add(listener);
     }
+    
+    /**
+     * Remove a listener from the list
+     * @param listener
+     */
+    public void removeTickListener(OnTickListener listener) {
+    	listeners.remove(listener);
+    }
+    
 }

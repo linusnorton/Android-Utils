@@ -8,5 +8,5 @@ import java.util.Set;
  */
 public interface Scene {
 
-    Set<Drawable> getDrawables();
+    Set<? extends Drawable> getDrawables();
 }
