@@ -1,6 +1,7 @@
 package norton.android.util.game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import android.util.Log;
 
@@ -16,7 +17,7 @@ public class GameThread implements Runnable {
     private int tickLength;
     private boolean running;
     private boolean paused;
-    private ArrayList<OnTickListener> listeners;
+    private HashSet<OnTickListener> listeners;
 
     /**
      * Setup the thread with a default 20fps
@@ -33,7 +34,7 @@ public class GameThread implements Runnable {
         tickLength = (int) (1000 / fps);
         running = false;
         paused = false;
-        listeners = new ArrayList<OnTickListener>();
+        listeners = new HashSet<OnTickListener>();
     }
     
     /**

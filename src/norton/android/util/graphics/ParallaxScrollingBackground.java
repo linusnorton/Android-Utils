@@ -1,16 +1,13 @@
 package norton.android.util.graphics;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
-
 import norton.android.util.game.OnTickListener;
 
-import android.graphics.Bitmap;
-
 public class ParallaxScrollingBackground implements Scene, OnTickListener {
-	private HashSet<BackgroundLayer> layers;
+	private LinkedHashSet<BackgroundLayer> layers;
 
-	public ParallaxScrollingBackground(HashSet<BackgroundLayer> layers) {
+	public ParallaxScrollingBackground(LinkedHashSet<BackgroundLayer> layers) {
 		this.layers = layers;
 	}
 
@@ -25,6 +22,4 @@ public class ParallaxScrollingBackground implements Scene, OnTickListener {
 			layer.scroll();
 		}
 	}
-	
-	
 }

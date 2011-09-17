@@ -20,10 +20,11 @@ public class BackgroundLayer implements Drawable {
 	public void onDraw(Canvas canvas) {
 		float pos = x;
 		
-		while(x < canvas.getWidth()) {
-			canvas.drawBitmap(image, x, y, null);
-			pos += x;
+		while(pos < canvas.getWidth()) {
+			canvas.drawBitmap(image, pos, y, null);
+			pos += image.getWidth();
 		}
+				
 	}
 
 	public void scroll() {
