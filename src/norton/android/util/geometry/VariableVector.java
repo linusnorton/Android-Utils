@@ -37,8 +37,12 @@ public class VariableVector extends Vector {
      *Increase the magnitude of the vector
      */
     public void accelerate() {
-        if (this.magnitude < maxSpeed) {
-            this.magnitude += acceleration;
+        if (magnitude < maxSpeed) {
+            magnitude += acceleration;
+            
+            if (magnitude > maxSpeed) {
+            	magnitude = maxSpeed;
+            }
         }
     }
     
@@ -46,8 +50,12 @@ public class VariableVector extends Vector {
      * Decrease the magnitude of the vector
      */
     public void decelerate() {
-        if (this.magnitude > minSpeed) {
-            this.magnitude -= deceleration;
+        if (magnitude > minSpeed) {
+            magnitude -= deceleration;
+            
+            if (magnitude < minSpeed) {
+            	magnitude = minSpeed;
+            }
         }
     }
 
