@@ -54,7 +54,7 @@ public class GameThread implements Runnable {
                 } catch (InterruptedException e) { }            
             }
             else {
-                Log.w("GAME_THREAD", "Current lag: " + Long.toString(tickLength - loopExecutionTime));
+                //Log.w("GAME_THREAD", "Current lag: " + Long.toString(tickLength - loopExecutionTime));
             }
             
             loopStartTime = System.currentTimeMillis();
