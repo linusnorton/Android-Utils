@@ -1,6 +1,5 @@
 package norton.android.util.game;
 
-import android.graphics.Rect;
 import norton.android.util.geometry.Particle;
 
 /**
@@ -77,12 +76,41 @@ public class Sprite extends Particle {
     public int getBottom() {
         return (int) y + height;
     }
-    
+        
+	/**
+	 * Calculate the over crossing areas and scan each pixel for a collision
+	 * 
+	 * @param balloon
+	 * @param train
+	 * @return
+	 */
+    public boolean isCollidingWith(Sprite sprite) {
+    	int left = Math.max(getLeft(), sprite.getLeft());
+		int right = Math.min(getRight(), sprite.getRight());
+		int top = Math.max(getTop(), sprite.getTop());
+		int bottom = Math.min(getBottom(), sprite.getBottom());
+
+		for (int x = left; x < right; x++) {
+		    for (int y = top; y < bottom; y++) {
+		        if (isFilled(x - getLeft(), y - getTop()) && 
+	        		sprite.isFilled(x - sprite.getLeft(), y - sprite.getTop())) {
+		        	return true;
+		        }
+		    }
+		}
+		
+		return false; 
+    }
+
     /**
-     * Return the collidable area
+     * Is this pixel transparent or filled
+     * 
+     * @param x
+     * @param y
      * @return
      */
-    public Rect getCollisionMap() {
-        return new Rect(getLeft(), getTop(), getRight(), getBottom());
-    }
+	public boolean isFilled(int x, int y) {
+		return true; 
+	}
+   
 }
