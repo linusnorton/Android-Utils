@@ -6,10 +6,10 @@ package norton.android.util.geometry;
  * @author Linus Norton <linusnorton@gmail.com>
  */
 public class VariableVector extends Vector {
-    private float minSpeed;
-    private float maxSpeed;
-    private float acceleration;
-    private float deceleration;
+    protected float minSpeed;
+    protected float maxSpeed;
+    protected float acceleration;
+    protected float deceleration;
 
     /**
      * Create a variable force vector
@@ -41,7 +41,7 @@ public class VariableVector extends Vector {
             magnitude += acceleration;
             
             if (magnitude > maxSpeed) {
-            	magnitude = maxSpeed;
+                magnitude = maxSpeed;
             }
         }
     }
@@ -54,7 +54,7 @@ public class VariableVector extends Vector {
             magnitude -= deceleration;
             
             if (magnitude < minSpeed) {
-            	magnitude = minSpeed;
+                magnitude = minSpeed;
             }
         }
     }

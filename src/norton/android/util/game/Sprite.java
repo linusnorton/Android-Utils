@@ -77,29 +77,29 @@ public class Sprite extends Particle {
         return (int) y + height;
     }
         
-	/**
-	 * Calculate the over crossing areas and scan each pixel for a collision
-	 * 
-	 * @param balloon
-	 * @param train
-	 * @return
-	 */
+    /**
+     * Calculate the over crossing areas and scan each pixel for a collision
+     * 
+     * @param balloon
+     * @param train
+     * @return
+     */
     public boolean isCollidingWith(Sprite sprite) {
-    	int left = Math.max(getLeft(), sprite.getLeft());
-		int right = Math.min(getRight(), sprite.getRight());
-		int top = Math.max(getTop(), sprite.getTop());
-		int bottom = Math.min(getBottom(), sprite.getBottom());
+        int left = Math.max(getLeft(), sprite.getLeft());
+        int right = Math.min(getRight(), sprite.getRight());
+        int top = Math.max(getTop(), sprite.getTop());
+        int bottom = Math.min(getBottom(), sprite.getBottom());
 
-		for (int x = left; x < right; x++) {
-		    for (int y = top; y < bottom; y++) {
-		        if (isFilled(x - getLeft(), y - getTop()) && 
-	        		sprite.isFilled(x - sprite.getLeft(), y - sprite.getTop())) {
-		        	return true;
-		        }
-		    }
-		}
-		
-		return false; 
+        for (int x = left; x < right; x++) {
+            for (int y = top; y < bottom; y++) {
+                if (isFilled(x - getLeft(), y - getTop()) && 
+                    sprite.isFilled(x - sprite.getLeft(), y - sprite.getTop())) {
+                    return true;
+                }
+            }
+        }
+        
+        return false; 
     }
 
     /**
@@ -109,8 +109,8 @@ public class Sprite extends Particle {
      * @param y
      * @return
      */
-	public boolean isFilled(int x, int y) {
-		return true; 
-	}
+    public boolean isFilled(int x, int y) {
+        return true; 
+    }
    
 }
