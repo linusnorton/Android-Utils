@@ -1,6 +1,10 @@
 package norton.android.util.game;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import norton.android.util.geometry.Particle;
+import norton.android.util.graphics.Drawable;
 
 /**
  * A sprite is a game object that is rendered on screen. It can 
@@ -8,17 +12,19 @@ import norton.android.util.geometry.Particle;
  * 
  * @author Linus Norton <linusnorton@gmail.com>
  */
-public class Sprite extends Particle {
+public class Sprite extends Particle implements Drawable {
     protected int width;
     protected int height;
+    protected Bitmap image;
     
-    public Sprite(int x, int y, int width, int height) {
+    public Sprite(int x, int y, Bitmap image) {
         super();       
         
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;              
+        this.image = image;
+        this.width = image.getWidth();
+        this.height = image.getHeight();              
     }
     
     /**
@@ -103,14 +109,21 @@ public class Sprite extends Particle {
     }
 
     /**
-     * Is this pixel transparent or filled
-     * 
+     * Draw the Balloon
+     */
+    @Override
+    public void onDraw(Canvas canvas) {
+        canvas.drawBitmap(image, x, y, null);        
+    }
+    
+    /**
+     * If the given pixel is not transparent then it is filled
      * @param x
      * @param y
      * @return
      */
     public boolean isFilled(int x, int y) {
-        return true; 
-    }
+        return image.getPixel(x, y) != Color.TRANSPARENT;
+    } 
    
 }
